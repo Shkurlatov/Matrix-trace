@@ -1,4 +1,4 @@
-﻿using System;
+﻿using MatrixProject;
 
 namespace TraceProject
 {
@@ -6,26 +6,13 @@ namespace TraceProject
     {
         static void Main(string[] args)
         {
-            Matrix matrix = new Matrix(InputNumber("Enter number of rows"), InputNumber("Enter number of columns"));
+            ConsoleInterface console = new ConsoleInterface();
 
-            matrix.OutputMatrixTrace();
+            Matrix matrix = new Matrix(console.InputNumber("Enter number of rows"), console.InputNumber("Enter number of columns"));
 
-            matrix.OutputSnakeSequence();
+            console.OutputMatrixTrace(matrix.MatrixArray);
 
-            static int InputNumber(string message)
-            {
-                Console.WriteLine(message);
-
-                int.TryParse(Console.ReadLine(), out int num);
-
-                while (num < 1)
-                {
-                    Console.WriteLine("Please enter an intager greater than zero");
-                    int.TryParse(Console.ReadLine(), out num);
-                }
-
-                return num;
-            }
+            console.OutputSnakeSequence(matrix.MatrixArray);
         }
     }
 }
