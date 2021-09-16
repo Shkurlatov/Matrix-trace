@@ -10,9 +10,9 @@ namespace TraceProject
 
             Matrix matrix = new Matrix(console.InputNumber("Enter number of rows"), console.InputNumber("Enter number of columns"));
 
-            console.OutputMatrixTrace(matrix.MatrixArray);
+            console.OutputMatrixTrace(matrix);
 
-            console.OutputSnakeSequence(matrix.MatrixArray);
+            console.OutputSnakeSequence(matrix.SnakeSequence);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using MatrixProject;
 
 namespace TraceProject
 {
@@ -24,25 +25,15 @@ namespace TraceProject
             return num;
         }
 
-        public void OutputMatrixTrace(int[,] matrixArray)
+        public void OutputMatrixTrace(Matrix matrix)
         {
-            if (matrixArray == null || matrixArray.Length < 1)
-            {
-                Console.WriteLine("Matrix is empty!");
-                return;
-            }
-
-            int matrixTrace = 0;
-            int rows = matrixArray.GetUpperBound(0) + 1;
-            int columns = matrixArray.Length / rows;
-
             Console.Write("\n");
 
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < matrix.Rows; i++)
             {
-                for (int j = 0; j < columns; j++)
+                for (int j = 0; j < matrix.Columns; j++)
                 {
-                    int value = matrixArray[i, j];
+                    int value = matrix.MatrixArray[i, j];
 
                     if (value < 100)
                     {
@@ -56,8 +47,6 @@ namespace TraceProject
 
                     if (i == j)
                     {
-                        matrixTrace += value;
-
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.Write(value);
                         Console.ResetColor();
@@ -67,7 +56,7 @@ namespace TraceProject
                         Console.Write(value);
                     }
 
-                    if (j < columns - 1)
+                    if (j < matrix.Columns - 1)
                     {
                         Console.Write(", ");
                     }
@@ -78,82 +67,11 @@ namespace TraceProject
                 }
             }
 
-            Console.WriteLine("\nMatrix trace = " + matrixTrace + "\n");
+            Console.WriteLine("\nMatrix trace = " + matrix.MatrixTrace + "\n");
         }
 
-        public void OutputSnakeSequence(int[,] matrixArray)
+        public void OutputSnakeSequence(int[] snakeSequence)
         {
-            if (matrixArray == null || matrixArray.Length < 1)
-            {
-                Console.WriteLine("Matrix is empty!");
-                return;
-            }
-
-            int rows = matrixArray.GetUpperBound(0) + 1;
-            int columns = matrixArray.Length / rows;
-            int[] snakeSequence = new int[rows * columns];
-
-            int cycle = 0;
-            int edge = 0;
-            int point = 0;
-
-            if (columns == 1)
-            {
-                edge = 1;
-            }
-
-            for (int i = 0; i < snakeSequence.Length; i++)
-            {
-                if (edge % 4 == 0)
-                {
-                    snakeSequence[i] = matrixArray[cycle, point];
-                    point++;
-                    if (point == columns - (cycle + 1))
-                    {
-                        point = cycle;
-                        edge++;
-                    }
-                    continue;
-                }
-
-                if (edge % 4 == 1)
-                {
-                    snakeSequence[i] = matrixArray[point, columns - (cycle + 1)];
-                    point++;
-                    if (point == rows - (cycle + 1))
-                    {
-                        point = columns - (cycle + 1);
-                        edge++;
-                    }
-                    continue;
-                }
-
-                if (edge % 4 == 2)
-                {
-                    snakeSequence[i] = matrixArray[rows - (cycle + 1), point];
-                    point--;
-                    if (point == cycle)
-                    {
-                        point = rows - (cycle + 1);
-                        edge++;
-                    }
-                    continue;
-                }
-
-                if (edge % 4 == 3)
-                {
-                    snakeSequence[i] = matrixArray[point, cycle];
-                    point--;
-                    if (point == cycle)
-                    {
-                        cycle++;
-                        point = cycle;
-                        edge++;
-                    }
-                    continue;
-                }
-            }
-
             Console.WriteLine("Matrix snake sequence is [ " + String.Join(", ", snakeSequence) + " ]");
         }
     }
