@@ -67,12 +67,12 @@ namespace TraceProject
                 }
             }
 
-            Console.WriteLine("\nMatrix trace = " + matrix.MatrixTrace + "\n");
+            Console.WriteLine("\nMatrix trace = " + matrix.MatrixTrace);
         }
 
         public void OutputSnakeSequence(int[] snakeSequence)
         {
-            Console.WriteLine("Matrix snake sequence is [ " + String.Join(", ", snakeSequence) + " ]");
+            Console.WriteLine("\nMatrix snake sequence is [ " + String.Join(", ", snakeSequence) + " ]");
         }
     }
 }

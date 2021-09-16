@@ -22,9 +22,12 @@ namespace MatrixProject
 
         private int GreaterThanZero(int inputValue)
         {
-            int value = (inputValue > 0) ? inputValue : 1;
+            if (inputValue > 0)
+            {
+                return inputValue;
+            }
 
-            return value;
+            return 1;
         }
 
         private int[,] GenerateMatrix()
