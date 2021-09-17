@@ -27,6 +27,11 @@ namespace TraceProject
 
         public void OutputMatrixTrace(Matrix matrix)
         {
+            if (IsEmpty(matrix))
+            {
+                return;
+            }
+
             Console.Write("\n");
 
             for (int i = 0; i < matrix.Rows; i++)
@@ -70,9 +75,26 @@ namespace TraceProject
             Console.WriteLine("\nMatrix trace = " + matrix.MatrixTrace);
         }
 
-        public void OutputSnakeSequence(int[] snakeSequence)
+        public void OutputSnakeSequence(Matrix matrix)
         {
-            Console.WriteLine("\nMatrix snake sequence is [ " + String.Join(", ", snakeSequence) + " ]");
+            if (IsEmpty(matrix))
+            {
+                return;
+            }
+
+            Console.WriteLine("\nMatrix snake sequence is [ " + String.Join(", ", matrix.SnakeSequence) + " ]");
+        }
+
+        private bool IsEmpty(Matrix matrix)
+        {
+            if (matrix == null || matrix.MatrixArray.Length == 0)
+            {
+                Console.WriteLine("\nThe matrix is empty!");
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

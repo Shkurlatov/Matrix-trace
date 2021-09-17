@@ -12,7 +12,7 @@ namespace TraceProject
 
             console.OutputMatrixTrace(matrix);
 
-            console.OutputSnakeSequence(matrix.SnakeSequence);
+            console.OutputSnakeSequence(matrix);
         }
     }
 }
