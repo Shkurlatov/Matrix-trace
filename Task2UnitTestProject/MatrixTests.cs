@@ -7,12 +7,15 @@ namespace Task2UnitTestProject
 {
     public class TraceTests
     {
+        readonly Configuration configuration = new Configuration();
+
         [Theory]
         [MemberData(nameof(MatrixTestData))]
         public void Matrix_InitializationAndGenerate(int expectedArrayLength, int rowsNum, int columnsNum)
         {
             // Arrange
-            var matrix = new Matrix(rowsNum, columnsNum);
+            int[] arrayRange = configuration.GetArrayRange();
+            var matrix = new Matrix(rowsNum, columnsNum, arrayRange);
 
             // Assert
             Assert.Equal(expectedArrayLength, matrix.MatrixArray.Length);
@@ -22,7 +25,7 @@ namespace Task2UnitTestProject
             {
                 for (int j = 0; j < matrix.Columns; j++)
                 {
-                    Assert.True(matrix.MatrixArray[i, j] > -1 && matrix.MatrixArray[i, j] < 101);
+                    Assert.True(matrix.MatrixArray[i, j] >= arrayRange[0] && matrix.MatrixArray[i, j] < arrayRange[1]);
 
                     if (i == j)
                     {

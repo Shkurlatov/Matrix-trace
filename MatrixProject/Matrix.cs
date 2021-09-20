@@ -10,14 +10,25 @@ namespace MatrixProject
         public int MatrixTrace { get; private set; }
         public int[] SnakeSequence { get; private set; }
 
-        public Matrix(int rows, int columns)
+        private readonly int[] ArrayRange;
+
+        public Matrix(int rows, int columns, int[] arrayRange)
         {
             Rows = GreaterThanZero(rows);
             Columns = GreaterThanZero(columns);
 
-            MatrixArray = GenerateMatrix();
-            MatrixTrace = FindMatrixTrace();
-            SnakeSequence = FindSnakeSequence();
+            if (arrayRange != null)
+            {
+                ArrayRange = arrayRange;
+            }
+            else
+            {
+                ArrayRange = new int[] { 0, 1 };
+            }
+
+            GenerateMatrix();
+            FindMatrixTrace();
+            FindSnakeSequence();
         }
 
         private int GreaterThanZero(int inputValue)
@@ -30,9 +41,9 @@ namespace MatrixProject
             return 1;
         }
 
-        private int[,] GenerateMatrix()
+        private void GenerateMatrix()
         {
-            int[,] matrixArray = new int[Rows, Columns];
+            MatrixArray = new int[Rows, Columns];
 
             Random random = new Random();
 
@@ -40,34 +51,28 @@ namespace MatrixProject
             {
                 for (int j = 0; j < Columns; j++)
                 {
-                    matrixArray[i, j] = random.Next(0, 101);
+                    MatrixArray[i, j] = random.Next(ArrayRange[0], ArrayRange[1]);
                 }
             }
-
-            return matrixArray;
         }
 
-        private int FindMatrixTrace()
+        private void FindMatrixTrace()
         {
-            int matrixTrace = 0;
-
             for (int i = 0; i < Rows; i++)
             {
                 for (int j = 0; j < Columns; j++)
                 {
                     if (i == j)
                     {
-                        matrixTrace += MatrixArray[i, j];
+                        MatrixTrace += MatrixArray[i, j];
                     }
                 }
             }
-
-            return matrixTrace;
         }
 
-        private int[] FindSnakeSequence()
+        private void FindSnakeSequence()
         {
-            int[] snakeSequence = new int[Rows * Columns];
+            SnakeSequence = new int[Rows * Columns];
 
             int cycle = 0;
             int edge = 0;
@@ -78,11 +83,11 @@ namespace MatrixProject
                 edge = 1;
             }
 
-            for (int i = 0; i < snakeSequence.Length; i++)
+            for (int i = 0; i < SnakeSequence.Length; i++)
             {
                 if (edge % 4 == 0)
                 {
-                    snakeSequence[i] = MatrixArray[cycle, point];
+                    SnakeSequence[i] = MatrixArray[cycle, point];
                     point++;
                     if (point == Columns - (cycle + 1))
                     {
@@ -94,7 +99,7 @@ namespace MatrixProject
 
                 if (edge % 4 == 1)
                 {
-                    snakeSequence[i] = MatrixArray[point, Columns - (cycle + 1)];
+                    SnakeSequence[i] = MatrixArray[point, Columns - (cycle + 1)];
                     point++;
                     if (point == Rows - (cycle + 1))
                     {
@@ -106,7 +111,7 @@ namespace MatrixProject
 
                 if (edge % 4 == 2)
                 {
-                    snakeSequence[i] = MatrixArray[Rows - (cycle + 1), point];
+                    SnakeSequence[i] = MatrixArray[Rows - (cycle + 1), point];
                     point--;
                     if (point == cycle)
                     {
@@ -118,7 +123,7 @@ namespace MatrixProject
 
                 if (edge % 4 == 3)
                 {
-                    snakeSequence[i] = MatrixArray[point, cycle];
+                    SnakeSequence[i] = MatrixArray[point, cycle];
                     point--;
                     if (point == cycle)
                     {
@@ -129,8 +134,6 @@ namespace MatrixProject
                     continue;
                 }
             }
-
-            return snakeSequence;
         }
     }
 }
