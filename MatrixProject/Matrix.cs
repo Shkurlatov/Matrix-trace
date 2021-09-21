@@ -78,15 +78,22 @@ namespace MatrixProject
             int edge = 0;
             int point = 0;
 
-            if (Columns == 1)
-            {
-                edge = 1;
-            }
-
             for (int i = 0; i < SnakeSequence.Length; i++)
             {
                 if (edge % 4 == 0)
                 {
+                    if (point == Columns - (cycle + 1))
+                    {
+                        int offset = 0;
+                        while (i < SnakeSequence.Length)
+                        {
+                            SnakeSequence[i] = MatrixArray[cycle + offset, point];
+                            i++;
+                            offset++;
+                        }
+                        return;
+                    }
+
                     SnakeSequence[i] = MatrixArray[cycle, point];
                     point++;
                     if (point == Columns - (cycle + 1))

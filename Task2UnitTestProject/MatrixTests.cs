@@ -40,6 +40,12 @@ namespace Task2UnitTestProject
 
         public static IEnumerable<object[]> MatrixTestData()
         {
+            yield return new object[] { 12, 2, 6 };
+            yield return new object[] { 12, 6, 2 };
+            yield return new object[] { 15, 5, 3 };
+            yield return new object[] { 40, 8, 5 };
+            yield return new object[] { 693, 99, 7 };
+            yield return new object[] { 54, 3, 18 };
             yield return new object[] { 16, 4, 4 };
             yield return new object[] { 15, 3, 5 };
             yield return new object[] { 1, 0, 0 };
